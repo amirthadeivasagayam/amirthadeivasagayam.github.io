@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d35">
+  <meta name="description" content="Portfolio of Amirthambikai D, Computer Science and Engineering student and aspiring software engineer.">
+  <title>Amirthambikai D | Software Engineer Portfolio</title>
+  <style>
+    :root {
+      --navy: #101d35;
+      --navy-2: #192b4a;
+      --ink: #1d293b;
+      --muted: #657187;
+      --accent: #4f8cff;
+      --accent-soft: #eaf1ff;
+      --line: #e3e9f2;
+      --surface: #ffffff;
+      --page: #f5f7fb;
+      --radius: 18px;
+      --shadow: 0 12px 34px rgba(16, 29, 53, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .container { width: min(1100px, calc(100% - 48px)); margin-inline: auto; }
+    .site-header {
+      color: white;
+      background: linear-gradient(135deg, #101d35 0%, #1c3154 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .site-header::after {
+      content: "";
+      position: absolute;
+      width: 420px; height: 420px;
+      right: -130px; top: 80px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 50%;
+      box-shadow: 0 0 0 45px rgba(255,255,255,.025), 0 0 0 95px rgba(255,255,255,.02);
+      pointer-events: none;
+    }
+    .nav {
+      min-height: 76px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; position: relative; z-index: 1;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .brand { color: white; text-decoration: none; font-size: 1.05rem; font-weight: 750; letter-spacing: -.02em; }
+    .nav-links { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+    .nav-links a { color: #d4deee; text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .nav-links a:hover { color: white; }
+    .hero {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr);
+      gap: 56px; align-items: center;
+      padding-block: 76px 86px;
+    }
+    .eyebrow {
+      margin: 0 0 14px; color: #9fc1ff;
+      font-size: .78rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase;
+    }
+    h1 { margin: 0; color: white; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.08; letter-spacing: -.055em; }
+    .hero-copy { max-width: 650px; margin: 22px 0 28px; color: #d1dced; font-size: 1.08rem; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 46px; padding: 10px 19px; border-radius: 9px;
+      text-decoration: none; font-size: .92rem; font-weight: 700;
+      border: 1px solid rgba(255,255,255,.35); color: white;
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); background: rgba(255,255,255,.1); }
+    .button.primary { background: #79a9ff; border-color: #79a9ff; color: #10203c; }
+    .button.primary:hover { background: #95bbff; }
+    .quick-card {
+      padding: 26px; border-radius: var(--radius);
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(8px);
+    }
+    .quick-card h2 { margin: 0 0 20px; color: white; font-size: 1rem; }
+    .quick-item { padding: 13px 0; border-top: 1px solid rgba(255,255,255,.14); }
+    .quick-item:first-of-type { border-top: 0; padding-top: 0; }
+    .quick-label { display: block; color: #aebed5; font-size: .72rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .quick-value { display: block; margin-top: 4px; color: white; font-size: .97rem; font-weight: 600; line-height: 1.5; }
+    .quick-value.score { color: #9fc1ff; font-size: 1.8rem; letter-spacing: -.04em; }
+    main { padding-block: 22px 70px; }
+    .section { padding-block: 54px; }
+    .section + .section { border-top: 1px solid var(--line); }
+    .section-heading { margin-bottom: 28px; }
+    .section-kicker { margin: 0 0 6px; color: var(--accent); font-size: .75rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h2.section-title { margin: 0; color: var(--navy); font-size: clamp(1.8rem, 3vw, 2.25rem); line-height: 1.2; letter-spacing: -.04em; }
+    .section-intro { max-width: 720px; margin: 12px 0 0; color: var(--muted); }
+    .about-copy { max-width: 850px; }
+    .about-copy p { margin: 0 0 14px; color: #4f5d72; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .skill-card, .project-card, .cert-card {
+      min-width: 0; background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .skill-card { padding: 22px; }
+    .skill-card h3 { margin: 0 0 14px; color: var(--navy); font-size: 1rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .chips li {
+      padding: 6px 10px; border-radius: 7px; background: var(--accent-soft);
+      color: #315b9d; font-size: .82rem; font-weight: 650; line-height: 1.35;
+    }
+    .timeline { position: relative; display: grid; gap: 24px; margin: 0; padding: 0 0 0 28px; list-style: none; }
+    .timeline::before { content: ""; position: absolute; left: 6px; top: 9px; bottom: 10px; width: 2px; background: #d9e4f5; }
+    .timeline-item { position: relative; min-width: 0; }
+    .timeline-item::before {
+      content: ""; position: absolute; left: -28px; top: 8px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); border: 3px solid var(--page);
+      box-shadow: 0 0 0 1px #c8d9f4;
+    }
+    .timeline-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 18px; }
+    .timeline-top h3 { margin: 0; color: var(--navy); font-size: 1.08rem; }
+    .date { color: var(--muted); font-size: .88rem; font-weight: 650; white-space: nowrap; }
+    .meta { margin: 5px 0 10px; color: var(--muted); font-size: .92rem; }
+    .details { margin: 10px 0 0; padding-left: 20px; color: #4f5d72; }
+    .details li { margin: 7px 0; padding-left: 3px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+    .project-card { display: flex; flex-direction: column; padding: 24px; }
+    .project-type {
+      display: inline-flex; align-self: flex-start; margin-bottom: 15px;
+      padding: 5px 10px; border-radius: 99px; background: var(--accent-soft);
+      color: #315b9d; font-size: .72rem; font-weight: 800; letter-spacing: .04em;
+    }
+    .project-card h3 { margin: 0; color: var(--navy); font-size: 1.18rem; line-height: 1.35; letter-spacing: -.02em; }
+    .project-subtitle { margin: 5px 0 0; color: var(--muted); font-size: .88rem; }
+    .project-card .details { margin-top: 14px; font-size: .91rem; }
+    .project-card .chips { margin-top: 18px; }
+    .project-links { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 20px; }
+    .project-links a { color: #285ba5; font-size: .88rem; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .project-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .education-list { display: grid; gap: 18px; }
+    .education-card { padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+    .education-card .timeline-top h3 { font-size: 1rem; }
+    .education-card .meta { margin-bottom: 0; }
+    .cert-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+    .cert-card { padding: 20px 22px; }
+    .cert-card h3 { margin: 0; color: var(--navy); font-size: 1rem; }
+    .cert-card p { margin: 5px 0 0; color: var(--muted); font-size: .88rem; }
+    .contact-section { color: white; background: var(--navy); padding-block: 58px; }
+    .contact-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; }
+    .contact-section h2 { margin: 0; color: white; font-size: 2rem; letter-spacing: -.04em; }
+    .contact-section .contact-intro { margin: 12px 0 0; color: #c1cde0; }
+    .contact-list { display: grid; gap: 11px; }
+    .contact-row {
+      display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; align-items: center;
+      gap: 12px; padding: 14px 16px; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 10px; background: rgba(255,255,255,.05);
+    }
+    .contact-label { color: #aebed5; font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .contact-value { min-width: 0; color: white; overflow-wrap: anywhere; text-decoration-color: #8eb7ff; }
+    .copy-btn { border: 1px solid #72839d; border-radius: 7px; padding: 5px 10px; background: transparent; color: white; font: inherit; font-size: .78rem; cursor: pointer; }
+    .copy-btn:hover { background: rgba(255,255,255,.1); }
+    footer { padding: 18px 0; background: #0b1629; color: #aebed5; text-align: center; font-size: .82rem; }
+    :focus-visible { outline: 3px solid #8eb7ff; outline-offset: 3px; }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; gap: 32px; padding-block: 58px 64px; }
+      .quick-card { max-width: 560px; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .contact-layout { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(100% - 32px, 1100px); }
+      .nav { align-items: flex-start; flex-direction: column; justify-content: center; gap: 10px; padding-block: 16px; }
+      .nav-links { gap: 10px 16px; }
+      .nav-links a { font-size: .82rem; }
+      .hero { padding-block: 48px 52px; }
+      .hero-copy { font-size: 1rem; }
+      .section { padding-block: 40px; }
+      .skills-grid, .projects-grid, .cert-grid { grid-template-columns: 1fr; }
+      .project-card { padding: 21px; }
+      .timeline-top { align-items: flex-start; flex-direction: column; gap: 2px; }
+      .date { white-space: normal; }
+      .contact-row { grid-template-columns: 1fr auto; gap: 5px 10px; }
+      .contact-label { grid-column: 1 / -1; }
+      .contact-value { grid-column: 1; }
+      .copy-btn { grid-column: 2; grid-row: 2; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#home">Amirthambikai D</a>
+        <div class="nav-links">
+          <a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a>
+          <a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a>
+        </div>
+      </nav>
+      <div class="hero" id="home">
+        <div>
+          <p class="eyebrow">Computer Science &amp; Engineering</p>
+          <h1>Amirthambikai D</h1>
+          <p class="hero-copy">Aspiring Software Engineer with experience in Java, web technologies, SQL databases and AI model integration. Interested in building useful applications and designing clear, user-friendly interfaces.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#contact">Get in touch</a>
+            <a class="button" href="https://github.com/amirthadeivasagayam" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="button" href="https://www.linkedin.com/in/amirtha-deivasagayam-40325334b" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+        <aside class="quick-card" aria-label="Profile summary">
+          <h2>Profile</h2>
+          <div class="quick-item"><span class="quick-label">Degree</span><span class="quick-value">B.E. Computer Science and Engineering</span></div>
+          <div class="quick-item"><span class="quick-label">College</span><span class="quick-value">Jerusalem College of Engineering</span></div>
+          <div class="quick-item"><span class="quick-label">Graduation</span><span class="quick-value">2027</span></div>
+          <div class="quick-item"><span class="quick-label">CGPA</span><span class="quick-value score">7.754</span></div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section" id="about">
+      <div class="section-heading"><p class="section-kicker">Introduction</p><h2 class="section-title">About me</h2></div>
+      <div class="about-copy">
+        <p>I am a Computer Science and Engineering student interested in developing applications that solve practical problems. My experience includes Java, SQL databases, web technologies, AI model integration and interface design using Figma.</p>
+        <p>During my internship, I gained exposure to application development and worked with different parts of the product process, including interface refinement and application components. I enjoy learning new tools and strengthening my development skills through practical work.</p>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-heading"><p class="section-kicker">What I work with</p><h2 class="section-title">Technical skills</h2></div>
+      <div class="skills-grid">
+        <article class="skill-card"><h3>Programming</h3><ul class="chips"><li>Java</li><li>C</li><li>Object-Oriented Programming</li></ul></article>
+        <article class="skill-card"><h3>Web technologies</h3><ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></article>
+        <article class="skill-card"><h3>Databases</h3><ul class="chips"><li>SQL</li><li>MySQL</li><li>SQLite</li><li>CRUD operations</li></ul></article>
+        <article class="skill-card"><h3>AI &amp; LLMs</h3><ul class="chips"><li>AI model integration</li><li>Prompt engineering</li></ul></article>
+        <article class="skill-card"><h3>Design</h3><ul class="chips"><li>Figma</li><li>UI/UX design</li></ul></article>
+        <article class="skill-card"><h3>Core strengths</h3><ul class="chips"><li>User-focused design</li><li>Learning new tools</li></ul></article>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-heading"><p class="section-kicker">Professional experience</p><h2 class="section-title">Experience</h2></div>
+      <ol class="timeline">
+        <li class="timeline-item">
+          <div class="timeline-top"><h3>App Developer Intern</h3><span class="date">June – July 2025</span></div>
+          <p class="meta">VISKAMNIX Technology and Training Services Pvt. Ltd.</p>
+          <ul class="details">
+            <li>Worked on a real-time, database-driven application focused on improving accessibility and learning opportunities in India.</li>
+            <li>Contributed to refining user interfaces and user journeys for responsive, inclusive experiences.</li>
+            <li>Gained exposure to front-end, back-end and AI application components, including AI model integration and prompt engineering.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-heading"><p class="section-kicker">Selected work</p><h2 class="section-title">Projects</h2><p class="section-intro">A selection of academic and team projects I have worked on.</p></div>
+      <div class="projects-grid">
+        <article class="project-card">
+          <span class="project-type">Ongoing · Team project</span>
+          <h3>AI-Driven Pet Identification System</h3>
+          <ul class="details">
+            <li>Developing a hybrid hardware and software system to identify and track pets through an AI-driven application.</li>
+            <li>Integrating GPS tracking with QR code scanning as a backup to help share a pet’s location and details with its owner.</li>
+          </ul>
+          <ul class="chips"><li>GPS hardware</li><li>QR codes</li><li>AI-driven app</li></ul>
+        </article>
+        <article class="project-card">
+          <span class="project-type">Team project</span>
+          <h3>Blood Wings</h3>
+          <p class="project-subtitle">Emergency Blood Finding and Donor Alert System</p>
+          <ul class="details">
+            <li>An application designed to connect blood donors with recipients during emergencies.</li>
+            <li>Contributed to the application, including UI/UX design in Figma.</li>
+          </ul>
+          <ul class="chips"><li>Figma</li><li>UI/UX design</li></ul>
+          <div class="project-links">
+            <a href="https://github.com/amirthadeivasagayam/BLOOD-WINGS-FINAL" target="_blank" rel="noopener noreferrer">View BLOOD-WINGS-FINAL on GitHub ↗</a>
+            <a href="https://github.com/amirthadeivasagayam/bloodwings" target="_blank" rel="noopener noreferrer">View bloodwings on GitHub ↗</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <span class="project-type">Mini project</span>
+          <h3>E-Commerce Portal</h3>
+          <ul class="details">
+            <li>Built a terminal-based e-commerce application with user registration, login, product browsing and cart features.</li>
+            <li>Connected a MySQL database and implemented CRUD operations.</li>
+          </ul>
+          <ul class="chips"><li>Java</li><li>MySQL</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-heading"><p class="section-kicker">Academic background</p><h2 class="section-title">Education</h2></div>
+      <div class="education-list">
+        <article class="education-card">
+          <div class="timeline-top"><h3>B.E. Computer Science and Engineering</h3><span class="date">2023 – 2027</span></div>
+          <p class="meta">Jerusalem College of Engineering · CGPA: 7.754</p>
+        </article>
+        <article class="education-card">
+          <div class="timeline-top"><h3>12th Standard</h3><span class="date">2022 – 2023</span></div>
+          <p class="meta">Nadar Sanga Matriculation Higher Secondary School, Chennai · 85.33%</p>
+        </article>
+        <article class="education-card">
+          <div class="timeline-top"><h3>SSLC</h3><span class="date">2020 – 2021</span></div>
+          <p class="meta">Sri Sarada Eashwar Vidya Mandir Matriculation Hr. Sec. School</p>
+        </article>
+      </div>
+      <div class="section-heading" style="margin:34px 0 18px"><p class="section-kicker">Additional learning</p><h2 class="section-title" style="font-size:1.55rem">Certifications</h2></div>
+      <div class="cert-grid">
+        <article class="cert-card"><h3>Networking Basics</h3><p>Cisco Networking Academy · February 2025</p></article>
+        <article class="cert-card"><h3>Gaming and Craft Studio</h3><p>TechForce Academy · February – May 2024</p></article>
+      </div>
+    </section>
+  </main>
+
+  <section class="contact-section" id="contact">
+    <div class="container contact-layout">
+      <div><p class="section-kicker">Get in touch</p><h2>Let's connect.</h2><p class="contact-intro">Feel free to reach out by email or phone, or connect with me through GitHub and LinkedIn.</p></div>
+      <div class="contact-list">
+        <div class="contact-row"><span class="contact-label">Email</span><a class="contact-value" href="mailto:amirthadeivasagayam@gmail.com">amirthadeivasagayam@gmail.com</a><button class="copy-btn" type="button" data-copy="amirthadeivasagayam@gmail.com">Copy</button></div>
+        <div class="contact-row"><span class="contact-label">Phone</span><a class="contact-value" href="tel:+917904328355">+91 7904328355</a><button class="copy-btn" type="button" data-copy="+91 7904328355">Copy</button></div>
+        <div class="contact-row"><span class="contact-label">LinkedIn</span><a class="contact-value" href="https://www.linkedin.com/in/amirtha-deivasagayam-40325334b" target="_blank" rel="noopener noreferrer">amirtha-deivasagayam ↗</a></div>
+        <div class="contact-row"><span class="contact-label">GitHub</span><a class="contact-value" href="https://github.com/amirthadeivasagayam" target="_blank" rel="noopener noreferrer">amirthadeivasagayam ↗</a></div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="container">© 2026 Amirthambikai D · Chennai, Tamil Nadu</div></footer>
+  <script>
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const value = button.getAttribute("data-copy");
+        const original = button.textContent;
+        try {
+          await navigator.clipboard.writeText(value);
+          button.textContent = "Copied";
+        } catch {
+          button.textContent = value;
+        }
+        window.setTimeout(() => { button.textContent = original; }, 1600);
+      });
+    });
+  </script>
+</body>
+</html>
